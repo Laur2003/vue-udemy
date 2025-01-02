@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJs Cheat Sheet</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600" rel="stylesheet">
+    <style>
+        body {
+            background-color: antiquewhite;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 30px;
+            font-weight: 700;
+            font-family: "Poppins", serif;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 500;
+            font-family: "Poppins", serif;
+        }
+
+        p,li {
+            font-size: 16px;
+            font-weight: 400;
+            font-family: "Poppins", serif;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #52db87; /* Accent color for code */
+            background-color: rgb(77, 77, 77);
+            display: inline-block;
+            padding: 6px 20px 20px;
+            white-space: pre;
+            width: auto;
+        }
+
+        .note {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Different ways of using vue</h1>
+    <ol>
+        <li>Widget - approach on a MPA (Multi page application) to control certain parts of the pages which are rendered on and served by a backend server.</li>
+        <li>SPA (Single Page Application) - Server only sends one HTML page, thereafter, Vue takes over and controls the UI.</li>
+    </ol>
+
+    <p>{{ variable }} - is only available between the tags (not as an attribute)</p>
+    <h2>example:</h2>
+    <code>
+    </code>
+    
+    <br>
+    <h1>v-bind</h1>
+
+    <p>v-bind:attributeName="variableName" - for attributes</p>
+    <h2>example:</h2>
+    <code>
+    </code>
+
+
+    <p>we can also use just :href="link" as a shortcut<p>
+
+    <p>inside {{ }} we can execute simple js code such as {{ 1 + 1 }}, {{ functionName() }} etc (not really used though)</p>
+    <br>
+    <h1>v-html</h1>
+    <p>v-html="variableName" can be used if the variable stores an html structure</p>
+    
+    <h2>examples:</h2>
+    <code>
+    </code>
+    
+    <p>however, this is not the best thing to do as it may create security issues</p>
+
+    <h1>Events:</h1>
+    <p>v-on:eventName="action"</p>
+    <h2>example:</h2>
+    <code>
+    </code>
+
+    <p>these functions can also take a parameter</p>
+    <h2>example:</h2>
+    <code>
+    </code>
+
+    <p>we can also do some logic inside html but it's not the best practice</p>
+    <h2>example:</h2>
+    <code></code>
+
+
+    <p>change a variable on an event</p>
+    <h2>example:</h2>
+    <code>
+    </code>
+
+    <p class="note">Note: "event" is sent by default by the browser</p>
+</body>
+</html>
+
+
+
+<script>
+    const codes = [
+`
+<p>{{ message }}</p>
+`,
+`
+<a v-bind:href="link">about Vue</a>
+`,
+`
+<p v-html="outputGoal()"></p>
+<p v-html="messageB"></p>
+`,
+`
+<button v-on:click="add()">Add</button>
+`,
+`
+<button v-on:click="add(5)">Add</button&gt>
+
+methods: {
+    add(num) {
+        this.counter+=num;
+    }
+}`,
+`
+<button v-on:click="counter++">Add</button>
+`,
+`
+<input type="text" v-on:input="changeName">
+
+<p>Your Name: {{ name }}</p>
+
+changeName(event) {
+    this.name = event.target.value
+}
+`
+]
+    const codeElements = document.querySelectorAll("code");
+
+    // Loop through each code element and log its content or modify it
+    codeElements.forEach((element, index) => {
+        element.innerText = codes[index];
+    });
+</script>
