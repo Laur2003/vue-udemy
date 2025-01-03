@@ -219,6 +219,35 @@
     <p>there is also the possibility to add classes using the array syntax. We can combine conditional and static classes in such arrays</p>
     <h2>example:</h2>
     <code class="code"></code>
+
+
+    <h1>Conditional rendering/displaying</h1>
+    <h2>v-if, v-else-if, v-else</h2>
+    <p>to render content conditionally, we use v-if, v-else-if, v-else. This RENDERS the content which means if the condition is not true for any of these operators, the DOM will not populate with the respective content</p>
+
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h2>v-show</h2>
+    <p>to render a piece of content in the DOM but just to hide it if needed, we can use v-show. Generally it's better to use conditional rendering instead of conditional hiding due to security reasons. However, if an element's visibility is being switched a lot and it's not impacting the security of the page, we will use v-show because of performance (rendering the same element multiple time is not the most optimal way to do thintgs)</p>
+
+
+    <h1>Rendering lists of data</h1>
+    <p>to render lists/arrays, we use v-for</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>we can also use indexes for the loop</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>we can also loop through objects and display the key and the index</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>to remove an item from a list we can use .splice()</p>
+    <h2>example:</h2>
+    <code class="code"></code>
 </body>
 </html>
 
@@ -361,6 +390,65 @@ computed: {
 `,
 `
 <div :class="['demo', boxClasses]" @click="clickOnBox"></div>
+`,
+`
+<p v-if="goals.length == 0">No goals have been added yet</p>
+<ul v-else>
+  <li>Goals</li>
+</ul>
+
+data() {
+  return { 
+    goals: []
+  };
+},
+`,
+`
+<ul>
+  <li v-for="goal in goals">{{ goal }}</li>
+</ul>
+
+data() {
+  return { 
+    goals: ['goal1', 'goal2']
+  };
+},
+`,
+`
+<ul>
+  <li v-for="(goal, index) in goals">{{ goal }}{{ index }}</li>
+</ul>
+
+data() {
+  return { 
+    goals: ['goal1', 'goal2']
+  };
+},
+`,
+`
+<ul v-else>
+  <li v-for="(goal, key, index) in goalsObject">{{ key }}-{{ goal }}-{{ index }}</li>
+</ul>
+
+data() {
+  return { 
+    goalsObject: {
+      name: "TestGoal",
+      importance: "High"
+    }
+  };
+},
+`,
+`
+<li
+  v-for="(goal, index) in goals"
+  @click="removeItem(index)">
+  {{ goal }}{{ index }}
+</li>
+
+removeItem(index) {
+  this.goals.splice(index, 1);
+}
 `
 ]
     const codeElements = document.querySelectorAll(".code");
