@@ -236,6 +236,7 @@
     <p>to render lists/arrays, we use v-for</p>
     <h2>example:</h2>
     <code class="code"></code>
+    <p class="note">Note: if we have an unique ID available, it's always a good idea to also include :key="id"</p>
 
     <p>we can also use indexes for the loop</p>
     <h2>example:</h2>
@@ -248,6 +249,19 @@
     <p>to remove an item from a list we can use .splice()</p>
     <h2>example:</h2>
     <code class="code"></code>
+
+    <h1>Vue: Behind the Scenes</h1>
+    <h2>ref</h2>
+    <p>instead of saving the input value on every keystroke, we can use a ref</p>
+    <h2>example - without ref:</h2>
+    <code class="code"></code>
+
+    <h2>example - with ref</h2>
+    <code class="code"></code>
+
+
+    <h2>Vue Instance Lifecycle</h2>
+    <img src="./images/image2.png" alt="">
 </body>
 </html>
 
@@ -449,6 +463,40 @@ data() {
 removeItem(index) {
   this.goals.splice(index, 1);
 }
+`,
+`
+<input type="text" @input="saveInput">
+<button @click="setText">Set Text</button>
+
+data() {
+  return {
+    currentUserInput: '',
+    message: 'Vue is great!',
+  };
+},
+methods: {
+  saveInput(event) {
+    this.currentUserInput = event.target.value;
+  },
+  setText() {
+    this.message = this.currentUserInput;
+  },
+},
+`,
+`
+<input type="text" ref="userInput">
+<button @click="setText">Set Text</button>
+
+data() {
+  return {
+    message: 'Vue is great!'
+  };
+},
+methods: {
+  setText() {
+    this.message = this.$refs.userInput.value;
+  },
+},
 `
 ]
     const codeElements = document.querySelectorAll(".code");
