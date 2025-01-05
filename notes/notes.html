@@ -107,6 +107,7 @@
 
     <h1>Event modifiers</h1>
     <p>Instead of using the traditional event.preventDefault(), Vue offers some modifiers of its own (.prevent)</p>
+    <h2>example:</h2>
     <code class="code"></code>
 
     <ol>
@@ -183,8 +184,10 @@
 
     <h2>v-model or the two-way binding</h2>
     <p>instead of using the v-bind:value in pair with the v-on:click</p>
+    <h2>example:</h2>
     <code class="code"></code>
     <p>we can just use v-model which does the same as the code above</p>
+    <h2>example:</h2>
     <code class="code"></code>
     
     
@@ -262,6 +265,14 @@
 
     <h2>Vue Instance Lifecycle</h2>
     <img src="./images/image2.png" alt="">
+
+    <h1>Components</h1>
+    <p>essentially components are small vue apps which are used inside the main apps. We use components for reusability and because of performance.</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h1>Vue Cli</h1>
+
 </body>
 </html>
 
@@ -497,6 +508,42 @@ methods: {
     this.message = this.$refs.userInput.value;
   },
 },
+`,
+`
+<ul>
+  <friend-contact></friend-contact>
+</ul>
+
+app.component('friend-contact', {
+  template: \`
+  <li>
+    <h2>{{ friend.name }}</h2>
+    <button @click="toggleDetails()">
+      {{ detailsAreVisible ? 'Hide' : 'Show' }} Details
+    </button>
+    <ul v-if="detailsAreVisible">
+      <li><strong>Phone:</strong> {{ friend.phone }}</li>
+      <li><strong>Email:</strong> {{ friend.email }}</li>
+    </ul>
+  </li>
+  \`,
+  data() {
+    return {
+      detailsAreVisible: false,
+      friend: {
+        id: 'manuel',
+        name: 'Manuel Lorenzo',
+        phone: '01234 5678 991',
+        email: 'manuel@localhost.com',
+      },
+    };
+  },
+  methods: {
+    toggleDetails() {
+      this.detailsAreVisible = !this.detailsAreVisible;
+    },
+  },
+});
 `
 ]
     const codeElements = document.querySelectorAll(".code");
