@@ -272,7 +272,18 @@
     <code class="code"></code>
 
     <h1>Vue Cli</h1>
+    <code class="code"></code>
 
+    <h2>components</h2>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h2>props - passing data from parent to child element</h2>
+    <h2>example: </h2>
+    <code class="code"></code>
+
+    <p class="note">Note: props shouldn't be mutated inside the child element</p>
+    
 </body>
 </html>
 
@@ -544,7 +555,55 @@ app.component('friend-contact', {
     },
   },
 });
+`,
 `
+npm install -g @vue/cli
+
+vue create my-project
+
+sudo npm run serve
+`,
+`
+FriendContact.vue
+<template>
+  <li>
+    <h2>{{ friend.name }}</h2>
+    <button @click="toggleDetails">{{detailsAreVisible ? 'Hide' : 'Show'}} Details</button>
+  <ul v-if="detailsAreVisible">
+    <li><strong>Phone:</strong> {{ friend.phone }}</li>
+    <li><strong>Email:</strong> {{ friend.email }}</li>
+  </ul>
+</li>
+</template>
+
+main.js
+import FriendContact from './components/FriendContact.vue';
+app.component('friend-contact', FriendContact);
+
+App.vue
+<friend-contact></friend-contact>
+`,
+`
+parent element
+<friend-contact
+  name="Laur Racovet"
+  phone-number="01234 78992"
+  email-address="laur@example.com"
+></friend-contact>
+
+child element
+<li><strong>Phone:</strong> {{ phoneNumber }}</li>
+<li><strong>Email:</strong> {{ emailAddress }}</li>
+
+export default {
+  props: [
+    'name',
+    'phoneNumber',
+    'emailAddress'
+  ]...
+}
+`
+
 ]
     const codeElements = document.querySelectorAll(".code");
 
