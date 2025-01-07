@@ -4,15 +4,12 @@
 
     <ul>
       <friend-contact
-        name="Laur Racovet"
-        phone-number="01234 78992"
-        email-address="laur@example.com"
-      ></friend-contact>
-
-      <friend-contact
-        name="Ryan Gosling"
-        phone-number="01234 78993"
-        email-address="ryan@example.com"
+        v-for="friend in friends"  
+        :key="friend.id"
+        :name="friend.name"
+        :phone-number="friend.phone"
+        :email-address="friend.email"
+        :is-favourite="friend.isFavourite"
       ></friend-contact>
     </ul>
   </section>
@@ -22,6 +19,22 @@
 export default {
   data() {
     return {
+      friends: [
+        {
+          id: 0,
+          name: 'Laur Racovet',
+          phone: '123 456 789',
+          email: 'laur@example.com',
+          isFavourite: true
+        },
+        {
+          id: 1,
+          name: 'Ryan Gosling',
+          phone: '123 456 788',
+          email: 'ryan@example.com',
+          isFavourite: false
+        }
+      ]
     }
   }
 }

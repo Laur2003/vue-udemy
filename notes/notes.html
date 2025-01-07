@@ -1,63 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VueJs Cheat Sheet</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VueJs Cheat Sheet</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600" rel="stylesheet">
-    <style>
-        body {
-          background-color: antiquewhite;
-          padding: 20px;
-        }
-        h1 {
-          font-size: 30px;
-          font-weight: 700;
-          font-family: "Poppins", serif;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 
-        h2 {
-          font-size: 20px;
-          font-weight: 500;
-          font-family: "Poppins", serif;
-        }
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightElement(block);
+      });
+  });
+</script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      padding: 40px;
+    }
+  
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      font-family: "Poppins", serif;
+      color: #ffffff;
+    }
+  
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      font-family: "Poppins", serif;
+      color: #ffffff;
+    }
+  
+    p, li {
+      font-size: 16px;
+      font-weight: 400;
+      font-family: "Poppins", serif;
+      color: #e0e0e0;
+    }
 
-        p,li {
-          font-size: 16px;
-          font-weight: 400;
-          font-family: "Poppins", serif;
-        }
+    img {
+      max-width: 800px;
+    }
+  
+    pre {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      overflow-x: auto;
+      padding: 0 10px !important;
+      margin: 0;
+      display: block;
+    }
+  
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      color: #dcdcaa !important;
+      white-space: pre-wrap;
+      text-shadow: none;
+      padding: 0 !important;
+      margin: 0;
+      display: block;
+      text-align: left;
+      margin-top: 6px;
+      margin-bottom: -12px;
+    }
+  
+    .language-html {
+      color: white !important;
+      background-color: #1e1e1e !important;
+      text-shadow: none !important;
+    }
 
-        .code {
-          font-family: 'Courier New', Courier, monospace;
-          color: #59ae81;
-          background-color: rgb(54, 54, 54);
-          display: inline-block;
-          padding: 6px 20px 20px;
-          white-space: pre;
-          width: auto;
-        }
+    .language-html .hljs-name {
+      color: #4c9adb;
+    }
+    .language-html .hljs-attr {
+      color: #9cd2ff;
+    }
+    .language-html .hljs-string {
+      color: #fffeda;
+    }
+    .language-html .hljs-tag {
+      color: #e1e1e1aa;
+    }
+  
 
-        .note {
-          font-style: italic;
-        }
 
-        img {
-          max-width: 700px;
-        }
-    </style>
+    .language-javascript {
+      color: #dcdcaa;
+      background-color: #1e1e1e !important;
+      text-shadow: none !important;
+    }
+    .language-javascript .hljs-attr { 
+      color: #fa72ff;
+    }
+    .language-javascript .hljs-title { 
+      color: #4db14d;
+    }
+    .language-javascript .hljs-params { 
+      color: #9cd2ff;
+    }
+    .language-javascript .hljs-variable { 
+      color: #4c9adb;
+    }
+    .language-javascript .hljs-property { 
+      color: #9cd2ff;
+    }
+    .language-javascript .hljs-number { 
+      color: #4c9adb;
+    }
+    .language-javascript .hljs-string { 
+      color: #4c9adb;
+    }
+
+    
+  </style>
 </head>
 <body>
     <h1>Different ways of using vue</h1>
     <ol>
-        <li>Widget - approach on a MPA (Multi page application) to control certain parts of the pages which are rendered on and served by a backend server.</li>
-        <li>SPA (Single Page Application) - Server only sends one HTML page, thereafter, Vue takes over and controls the UI.</li>
+      <li>Widget - approach on a MPA (Multi page application) to control certain parts of the pages which are rendered on and served by a backend server.</li>
+      <li>SPA (Single Page Application) - Server only sends one HTML page, thereafter, Vue takes over and controls the UI.</li>
     </ol>
 
     <p>{{ variable }} - is only available between the tags (not as an attribute)</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre>
+    <code class="language-html">  &lt;p&gt;{{ message }}&lt;/p&gt;</code>
+    </pre>
     
     <br>
     <h1>v-bind</h1>
@@ -65,7 +147,9 @@
     <p>v-bind:attributeName="variableName" - for attributes</p>
     <p>instead of v-bind we can use : as a shortcut</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre>
+    <code class="language-html">  &lt;a v-bind:href="link"&gt;about Vue&lt;/a&gt;</code>
+    </pre>
 
 
     <p>we can also use just :href="link" as a shortcut<p>
@@ -76,7 +160,12 @@
     <p>v-html="variableName" can be used if the variable stores an html structure</p>
     
     <h2>examples:</h2>
-    <code class="code"></code>
+    
+    <pre><code class="language-html">
+  &lt;p v-html="outputGoal()"&gt;&lt;/p&gt;
+  &lt;p v-html="messageB"&gt;&lt;/p&gt;</code>
+    </pre>
+
     
     <p>however, this is not the best thing to do as it may create security issues</p>
 
@@ -84,31 +173,76 @@
     <p>v-on:eventName="action"</p>
     <p>instead of v-on we can use @ as a shortcut</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre class="language-html">
+      <code>  &lt;button v-on:click="add()"&gt;Add&lt;/button&gt;</code>
+    </pre>
 
     <p>these functions can also take a parameter</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre class="language-html">
+    <code>  &lt;button v-on:click="add(5)"&gt;Add&lt;/button&gt;</code>
+    </pre>
+
+    <pre>
+    <code class="language-javascript">  methods: {
+    add(num) {
+      this.counter+=num;
+    }
+  }</code>
+  </pre>
 
     <p>we can also do some logic inside html but it's not the best practice</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre>
+    <code class="language-html">  &lt;button v-on:click="counter++"&gt;Add&lt;/button&gt;</code>
+    </pre>
 
 
     <p>change a variable on an event</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    
+    <pre>
+    <code class="language-html">  &lt;input type="text" v-on:input="changeName"&gt;
+  &lt;p&gt;Your Name: {{ name }}&lt;/p&gt;</code>
+  </pre>
+
+  <pre><code class="language-javascript">
+  changeName(event) {
+    this.name = event.target.value
+  }</code>
+</pre>
 
     <p class="note">Note: "event" is sent by default by the browser</p>
 
     <p>If we need to send another variable to the function, we need to include $event in the parameters list</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" v-on:input="changeName($event, Racovet)"&gt;
+  &lt;p&gt;Your Name: {{ name }}&lt;/p&gt;</code>
+    </pre>
+
+  <pre><code class="language-javascript">
+  changeName(event, lastName) {
+    this.name = event.target.value + " " + lastName
+  }</code>
+  </pre>
+
 
     <h1>Event modifiers</h1>
     <p>Instead of using the traditional event.preventDefault(), Vue offers some modifiers of its own (.prevent)</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;form v-on:submit.prevent="submitForm"&gt;
+    &lt;input type="text"&gt;
+    &lt;button&gt;Sign Up&lt;/button&gt;
+  &lt;/form&gt;</code>
+    </pre>
+
+    <pre><code class="language-javascript">
+  submitForm() {
+    alert('Submitted');
+  }</code>
+  </pre>
 
     <ol>
         <li>
@@ -144,7 +278,7 @@
         <li>
           <strong>.passive</strong>
           <ul>
-            <li><strong>Description:</strong> Indicates that the event listener will never call <code>preventDefault()</code>. Useful for performance optimization in scroll events.</li>
+            <li><strong>Description:</strong> Indicates that the event listener will never call preventDefault(). Useful for performance optimization in scroll events.</li>
           </ul>
         </li>
         <li>
@@ -162,13 +296,13 @@
         <li>
           <strong>Modifier Key Combinations</strong>
           <ul>
-            <li><strong>Description:</strong> Requires specific keys to be pressed (e.g., <code>.ctrl</code>, <code>.alt</code>, <code>.shift</code>, <code>.meta</code>).</li>
+            <li><strong>Description:</strong> Requires specific keys to be pressed (e.g., .ctrl, .alt, .shift, .meta).</li>
           </ul>
         </li>
         <li>
           <strong>Key Event Modifiers</strong>
           <ul>
-            <li><strong>Description:</strong> Used to listen for specific key presses (e.g., <code>.enter</code>, <code>.tab</code>, <code>.delete</code>, <code>.esc</code>, etc.).</li>
+            <li><strong>Description:</strong> Used to listen for specific key presses (e.g., .enter>, .tab, .delete, .esc, etc.).</li>
           </ul>
         </li>
         <li>
@@ -180,15 +314,36 @@
     </ol>
 
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" v-on:input="changeName($event, 'Racovet')" v-on:keyup.enter="confirmInput()"&gt;</code>
+    </pre>
+
+  <pre><code class="language-javascript">
+  confirmInput() {
+    this.confirmedName = this.name;
+  },</code>
+  </pre>
+    
 
     <h2>v-model or the two-way binding</h2>
     <p>instead of using the v-bind:value in pair with the v-on:click</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" v-bind:value="name" v-on:input="setName"&gt;
+  &lt;p&gt;Your Name: {{ name }}&lt;/p&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  setName(event) {
+    this.name = event.target.value;
+  },</code>
+  </pre>
+    
     <p>we can just use v-model which does the same as the code above</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" v-model="name"&gt;
+  &lt;p&gt;Your Name: {{ name }}&lt;/p&gt;</code>
+    </pre>
     
     
 
@@ -199,29 +354,99 @@
 
     <h2>example: (@keyup is just to make sure we display the updated name only when confirmed. Not really part of the example here)</h2>
 
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" v-model="name" @keyup.enter="confirmName"&gt;
+  &lt;p&gt;Your Name: {{ changedName }}&lt;/p&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  computed: {
+    changedName() {
+      if (this.confirmedName != "")
+        return this.confirmedName + " " + "Racovet";
+      else 
+        return "";
+    }
+  },
+  methods: {
+    ...
+    confirmName() {
+      this.confirmedName = this.name;
+    }
+  }</code>
+  </pre>
+    
 
     <h1>Watchers</h1>
     <p>watch methods are used to change something or perform an action when a variable's value has changed. This is useful for http requests, alerts etc. A watch method is named as the variable it's supposed to watch after</p>
 
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-javascript">
+  watch: {
+    counter(value) {
+      if (value &gt; 50) {
+        this.counter = 0;
+        window.alert("The counter has been set to 0");
+      }
+    }
+  },</code>
+    </pre>
+    
 
     <h1>Methods vs Computed vs Watch</h1>
-    <img src="./images/image1.png" alt="">
+    <img src="https://raw.githubusercontent.com/Laur2003/vue-udemy/main/notes/images/image1.png" alt="">
 
     <h1>Conditionally adding classes to elements</h1>
     <p>To add a class to an element we will use :class binding</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;div class="demo" :class="{active: boxSelected}" @click="clickOnBox"&gt;&lt;/div&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  data() {
+    return {
+      boxSelected: false
+    }
+  },
+  methods: {
+    clickOnBox() {
+      this.boxSelected = !this.boxSelected;
+    }
+  }</code>
+  </pre>
+    
 
     <p>we can also use computed methods to change the classes if the logic is a bit more complicated or if we have more classes to add/have</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;div class="demo" :class="boxClasses" @click="clickOnBox"&gt;&lt;/div&gt;</code>
+    </pre>
+
+    <pre><code class="language-javascript">
+  data() {
+    return {
+      boxSelected: false
+    }
+  },
+  methods: {
+    clickOnBox() {
+      this.boxSelected = !this.boxSelected;
+    }
+  },
+  computed: {
+    boxClasses() {
+      return { active: this.boxSelected };
+    }
+  }</code>
+    </pre>
+    
 
     <p>there is also the possibility to add classes using the array syntax. We can combine conditional and static classes in such arrays</p>
     <h2>example:</h2>
-    <code class="code"></code>
+
+    <pre><code class="language-html">
+  &lt;div :class="['demo', boxClasses]" @click="clickOnBox"&gt;&lt;/div&gt;</code>
+    </pre>
+    
 
 
     <h1>Conditional rendering/displaying</h1>
@@ -229,7 +454,20 @@
     <p>to render content conditionally, we use v-if, v-else-if, v-else. This RENDERS the content which means if the condition is not true for any of these operators, the DOM will not populate with the respective content</p>
 
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;p v-if="goals.length == 0"&gt;No goals have been added yet&lt;/p&gt;
+  &lt;ul v-else&gt;
+    &lt;li&gt;Goals&lt;/li&gt;
+  &lt;/ul&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  data() {
+    return { 
+      goals: []
+    };
+  },</code>
+  </pre>
+    
 
     <h2>v-show</h2>
     <p>to render a piece of content in the DOM but just to hide it if needed, we can use v-show. Generally it's better to use conditional rendering instead of conditional hiding due to security reasons. However, if an element's visibility is being switched a lot and it's not impacting the security of the page, we will use v-show because of performance (rendering the same element multiple time is not the most optimal way to do thintgs)</p>
@@ -238,376 +476,323 @@
     <h1>Rendering lists of data</h1>
     <p>to render lists/arrays, we use v-for</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;ul&gt;
+    &lt;li v-for="goal in goals"&gt;{{ goal }}&lt;/li&gt;
+  &lt;/ul&gt;</code>
+    </pre>
+
+    <pre><code class="language-javascript">
+  data() {
+    return { 
+      goals: ['goal1', 'goal2']
+    };
+  }</code>
+  </pre>
+    
     <p class="note">Note: if we have an unique ID available, it's always a good idea to also include :key="id"</p>
 
     <p>we can also use indexes for the loop</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;ul&gt;
+    &lt;li v-for="(goal, index) in goals"&gt;{{ goal }}{{ index }}&lt;/li&gt;
+  &lt;/ul&gt;</code>
+    </pre>
+  <pre><code class="language-javascript">
+  data() {
+    return { 
+      goals: ['goal1', 'goal2']
+    };
+  },</code>
+  </pre>
+    
 
     <p>we can also loop through objects and display the key and the index</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;ul v-else&gt;
+    &lt;li v-for="(goal, key, index) in goalsObject"&gt;{{ key }}-{{ goal }}-{{ index }}&lt;/li&gt;
+  &lt;/ul&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  data() {
+    return { 
+      goalsObject: {
+        name: "TestGoal",
+        importance: "High"
+      }
+    };
+  },</code>
+  </pre>
+    
 
     <p>to remove an item from a list we can use .splice()</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;li
+    v-for="(goal, index) in goals"
+    @click="removeItem(index)"&gt;
+    {{ goal }}{{ index }}
+  &lt;/li&gt;</code>
+  </pre>
+
+    <pre><code class="language-javascript">
+  removeItem(index) {
+    this.goals.splice(index, 1);
+  }</code>
+  </pre>
+    
 
     <h1>Vue: Behind the Scenes</h1>
     <h2>ref</h2>
     <p>instead of saving the input value on every keystroke, we can use a ref</p>
     <h2>example - without ref:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" @input="saveInput"&gt;
+  &lt;button @click="setText"&gt;Set Text&lt;/button&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  data() {
+    return {
+      currentUserInput: '',
+      message: 'Vue is great!',
+    };
+  },
+  methods: {
+    saveInput(event) {
+      this.currentUserInput = event.target.value;
+    },
+    setText() {
+      this.message = this.currentUserInput;
+    },
+  },</code>
+  </pre>
+    
 
     <h2>example - with ref</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;input type="text" ref="userInput"&gt;
+  &lt;button @click="setText"&gt;Set Text&lt;/button&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  data() {
+    return {
+      message: 'Vue is great!'
+    };
+  },
+  methods: {
+    setText() {
+      this.message = this.$refs.userInput.value;
+    },
+  },</code>
+  </pre>
+    
 
 
     <h2>Vue Instance Lifecycle</h2>
-    <img src="./images/image2.png" alt="">
+    <img src="https://raw.githubusercontent.com/Laur2003/vue-udemy/main/notes/images/image2.png" alt="">
 
     <h1>Components</h1>
     <p>essentially components are small vue apps which are used inside the main apps. We use components for reusability and because of performance.</p>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  &lt;ul&gt;
+    &lt;friend-contact&gt;&lt;/friend-contact&gt;
+  &lt;/ul&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  app.component('friend-contact', {
+    template: \`
+      &lt;li&gt;
+        &lt;h2&gt;{{ friend.name }}&lt;/h2&gt;
+        &lt;button @click="toggleDetails()"&gt;
+          {{ detailsAreVisible ? 'Hide' : 'Show' }} Details
+        &lt;/button&gt;
+        &lt;ul v-if="detailsAreVisible"&gt;
+          &lt;li&gt;&lt;strong&gt;Phone:&lt;/strong&gt; {{ friend.phone }}&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Email:&lt;/strong&gt; {{ friend.email }}&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    \`,
+    data() {
+      return {
+        detailsAreVisible: false,
+        friend: {
+          id: 'manuel',
+          name: 'Manuel Lorenzo',
+          phone: '01234 5678 991',
+          email: 'manuel@localhost.com',
+        },
+      };
+    },
+    methods: {
+      toggleDetails() {
+        this.detailsAreVisible = !this.detailsAreVisible;
+      },
+    },
+  });</code>
+  </pre>
+    
 
     <h1>Vue Cli</h1>
-    <code class="code"></code>
+    <pre><code class="language-javascript">
+  npm install -g @vue/cli
+
+  vue create my-project
+
+  sudo npm run serve</code>
+    </pre>
+    
 
     <h2>components</h2>
     <h2>example:</h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  FriendContact.vue
+  &lt;template&gt;
+    &lt;li&gt;
+      &lt;h2&gt;{{ friend.name }}&lt;/h2&gt;
+      &lt;button @click="toggleDetails"&gt;{{detailsAreVisible ? 'Hide' : 'Show'}} Details&lt;/button&gt;
+      &lt;ul v-if="detailsAreVisible"&gt;
+        &lt;li&gt;&lt;strong&gt;Phone:&lt;/strong&gt; {{ friend.phone }}&lt;/li&gt;
+        &lt;li&gt;&lt;strong&gt;Email:&lt;/strong&gt; {{ friend.email }}&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/template&gt;</code>
+    </pre>
+
+    <pre><code class="language-javascript">
+  //main.js
+  import FriendContact from './components/FriendContact.vue';
+  app.component('friend-contact', FriendContact);
+
+  App.vue
+  &lt;friend-contact&gt;&lt;/friend-contact&gt;</code>
+  </pre>
+    
 
     <h2>props - passing data from parent to child element</h2>
     <h2>example: </h2>
-    <code class="code"></code>
+    <pre><code class="language-html">
+  parent element
+  &lt;friend-contact
+    name="Laur Racovet"
+    phone-number="01234 78992"
+    email-address="laur@example.com"
+  &gt;&lt;/friend-contact&gt;
 
-    <p class="note">Note: props shouldn't be mutated inside the child element</p>
+  child element
+  &lt;li&gt;&lt;strong&gt;Phone:&lt;/strong&gt; {{ phoneNumber }}&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Email:&lt;/strong&gt; {{ emailAddress }}&lt;/li&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  export default {
+    props: [
+      'name',
+      'phoneNumber',
+      'emailAddress'
+    ]
+    ...
+  }</code>
+  </pre>
+    
+
+    <h2>unidirectional data flow</h2>
+    <p>props should't be mutated inside the child element. If we need to change a prop inside a child element, we just have to assign this prop to a temp variable</p>
+
+    <h2>prop validation</h2>
+    <h2>example:</h2>
+
+    <pre class="language-javascript"><code>
+  props: {
+    name: {
+      type: String,
+      required: true,
+      default: 'Friend'
+    },
+    phoneNumber: String,
+    emailAddress: String,
+    isFavourite: {
+      type: String,
+      required: false,
+      default: '0',
+      validator: function(value) {
+        return value === '1' || value === '0';
+      }
+    }
+  },</code>
+    </pre>
+    
+    
+    <h2>supported prop values:</h2>
+    <ul>
+      <li>String</li>
+      <li>Number</li>
+      <li>Boolean</li>
+      <li>Array</li>
+      <li>Object</li>
+      <li>Date</li>
+      <li>Function</li>
+      <li>Symbol</li>
+    </ul>
+
+    <p>for loop with components</p>
+    <h2>example:</h2>
+
+    <pre><code class="language-html">
+  &lt;friend-contact
+    v-for="friend in friends"  
+    :key="friend.id"
+    :name="friend.name"
+    :phone-number="friend.phone"
+    :email-address="friend.email"
+    :is-favourite="friend.isFavourite"
+  /&gt;</code>
+    </pre>
+    <pre><code class="language-javascript">
+  // Parent component
+  data() {
+    return {
+      friends: [
+        {
+          id: 0,
+          name: 'Laur Racovet',
+          phone: '123 456 789',
+          email: 'laur@example.com',
+          isFavourite: true
+        },
+        {
+          id: 1,
+          name: 'Ryan Gosling',
+          phone: '123 456 788',
+          email: 'ryan@example.com',
+          isFavourite: false
+        }
+      ]
+    }
+  }</code>
+  </pre>
+  
+  <pre><code class="language-javascript">
+  // Child component
+  props: {
+    id: Number,
+    name: {
+      type: String,
+      required: true,
+      default: 'Friend'
+    },
+    phoneNumber: String,
+    emailAddress: String,
+    isFavourite: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  }</code>
+</pre>
+  
     
 </body>
 </html>
-
-
-
-<script>
-    const codes = [
-`
-<p>{{ message }}</p>
-`,
-`
-<a v-bind:href="link">about Vue</a>
-`,
-`
-<p v-html="outputGoal()"></p>
-<p v-html="messageB"></p>
-`,
-`
-<button v-on:click="add()">Add</button>
-`,
-`
-<button v-on:click="add(5)">Add</button&gt>
-
-methods: {
-  add(num) {
-    this.counter+=num;
-  }
-}`,
-`
-<button v-on:click="counter++">Add</button>
-`,
-`
-<input type="text" v-on:input="changeName">
-
-<p>Your Name: {{ name }}</p>
-
-changeName(event) {
-  this.name = event.target.value
-}
-`,
-`
-<input type="text" v-on:input="changeName($event,Racovet)">
-
-<p>Your Name: {{ name }}</p>
-
-changeName(event, lastName) {
-  this.name = event.target.value + " " + lastName
-}
-`,
-`
-<form v-on:submit.prevent="submitForm">
-  <input type="text">
-  <button>Sign Up</button>
-</form>
-
-
-submitForm() {
-  alert('Submitted');
-}
-`,
-`
-<input type="text" v-on:input="changeName($event, 'Racovet')" v-on:keyup.enter="confirmInput()">
-
-confirmInput() {
-  this.confirmedName = this.name;
-},
-`,
-`
-<input type="text" v-bind:value="name" v-on:input="setName">
-<p>Your Name: {{ name }}</p>
-
-setName(event) {
-    this.name = event.target.value;
-},
-`,
-`
-<input type="text" v-model="name">
-<p>Your Name: {{ name }}</p>
-`,
-`
-<input type="text" v-model="name" @keyup.enter="confirmName">
-<p>Your Name: {{ changedName }}</p>
-
-computed: {
-  changedName() {
-    if (this.confirmedName != "")
-    return this.confirmedName + " " + "Racovet";
-    else return "";
-  }
-},
-methods: {
-  ...
-  confirmName() {
-    this.confirmedName = this.name;
-  }
-}
-`,
-`
-watch: {
-  counter(value) {
-    if (value > 50) {
-      this.counter = 0;
-      window.alert("The counter has been set to 0");
-    }
-  }
-},
-`,
-`
-<div class="demo" :class="{active: boxSelected}" @click="clickOnBox"></div>
-
-data() {
-  return {
-    boxSelected: false
-  }
-},
-methods: {
-  clickOnBox() {
-    this.boxSelected = !this.boxSelected;
-  }
-}
-`,
-`
-<div class="demo" :class="boxClasses" @click="clickOnBox"></div>
-
-data() {
-  return {
-    boxSelected: false
-  }
-},
-methods: {
-  clickOnBox() {
-    this.boxSelected = !this.boxSelected;
-  }
-},
-computed: {
-  boxClasses() {
-    return { active: this.boxSelected }
-  }
-},
-`,
-`
-<div :class="['demo', boxClasses]" @click="clickOnBox"></div>
-`,
-`
-<p v-if="goals.length == 0">No goals have been added yet</p>
-<ul v-else>
-  <li>Goals</li>
-</ul>
-
-data() {
-  return { 
-    goals: []
-  };
-},
-`,
-`
-<ul>
-  <li v-for="goal in goals">{{ goal }}</li>
-</ul>
-
-data() {
-  return { 
-    goals: ['goal1', 'goal2']
-  };
-},
-`,
-`
-<ul>
-  <li v-for="(goal, index) in goals">{{ goal }}{{ index }}</li>
-</ul>
-
-data() {
-  return { 
-    goals: ['goal1', 'goal2']
-  };
-},
-`,
-`
-<ul v-else>
-  <li v-for="(goal, key, index) in goalsObject">{{ key }}-{{ goal }}-{{ index }}</li>
-</ul>
-
-data() {
-  return { 
-    goalsObject: {
-      name: "TestGoal",
-      importance: "High"
-    }
-  };
-},
-`,
-`
-<li
-  v-for="(goal, index) in goals"
-  @click="removeItem(index)">
-  {{ goal }}{{ index }}
-</li>
-
-removeItem(index) {
-  this.goals.splice(index, 1);
-}
-`,
-`
-<input type="text" @input="saveInput">
-<button @click="setText">Set Text</button>
-
-data() {
-  return {
-    currentUserInput: '',
-    message: 'Vue is great!',
-  };
-},
-methods: {
-  saveInput(event) {
-    this.currentUserInput = event.target.value;
-  },
-  setText() {
-    this.message = this.currentUserInput;
-  },
-},
-`,
-`
-<input type="text" ref="userInput">
-<button @click="setText">Set Text</button>
-
-data() {
-  return {
-    message: 'Vue is great!'
-  };
-},
-methods: {
-  setText() {
-    this.message = this.$refs.userInput.value;
-  },
-},
-`,
-`
-<ul>
-  <friend-contact></friend-contact>
-</ul>
-
-app.component('friend-contact', {
-  template: \`
-  <li>
-    <h2>{{ friend.name }}</h2>
-    <button @click="toggleDetails()">
-      {{ detailsAreVisible ? 'Hide' : 'Show' }} Details
-    </button>
-    <ul v-if="detailsAreVisible">
-      <li><strong>Phone:</strong> {{ friend.phone }}</li>
-      <li><strong>Email:</strong> {{ friend.email }}</li>
-    </ul>
-  </li>
-  \`,
-  data() {
-    return {
-      detailsAreVisible: false,
-      friend: {
-        id: 'manuel',
-        name: 'Manuel Lorenzo',
-        phone: '01234 5678 991',
-        email: 'manuel@localhost.com',
-      },
-    };
-  },
-  methods: {
-    toggleDetails() {
-      this.detailsAreVisible = !this.detailsAreVisible;
-    },
-  },
-});
-`,
-`
-npm install -g @vue/cli
-
-vue create my-project
-
-sudo npm run serve
-`,
-`
-FriendContact.vue
-<template>
-  <li>
-    <h2>{{ friend.name }}</h2>
-    <button @click="toggleDetails">{{detailsAreVisible ? 'Hide' : 'Show'}} Details</button>
-  <ul v-if="detailsAreVisible">
-    <li><strong>Phone:</strong> {{ friend.phone }}</li>
-    <li><strong>Email:</strong> {{ friend.email }}</li>
-  </ul>
-</li>
-</template>
-
-main.js
-import FriendContact from './components/FriendContact.vue';
-app.component('friend-contact', FriendContact);
-
-App.vue
-<friend-contact></friend-contact>
-`,
-`
-parent element
-<friend-contact
-  name="Laur Racovet"
-  phone-number="01234 78992"
-  email-address="laur@example.com"
-></friend-contact>
-
-child element
-<li><strong>Phone:</strong> {{ phoneNumber }}</li>
-<li><strong>Email:</strong> {{ emailAddress }}</li>
-
-export default {
-  props: [
-    'name',
-    'phoneNumber',
-    'emailAddress'
-  ]...
-}
-`
-
-]
-    const codeElements = document.querySelectorAll(".code");
-
-    codeElements.forEach((element, index) => {
-        element.innerText = codes[index];
-    });
-</script>
+  

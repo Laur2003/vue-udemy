@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJs Cheat Sheet</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+
+    <style>
+        body {
+          background-color: antiquewhite;
+          padding: 20px;
+        }
+        h1 {
+          font-size: 30px;
+          font-weight: 700;
+          font-family: "Poppins", serif;
+        }
+
+        h2 {
+          font-size: 20px;
+          font-weight: 500;
+          font-family: "Poppins", serif;
+        }
+
+        p,li {
+          font-size: 16px;
+          font-weight: 400;
+          font-family: "Poppins", serif;
+        }
+        
+        .note {
+          font-style: italic;
+        }
+
+        img {
+          max-width: 700px;
+        }
+
+        pre {
+          background-color: #f5f5f5;
+          padding: 10px;
+          border-radius: 5px;
+          overflow-x: auto;
+        }
+        
+        code {
+          font-family: 'Courier New', Courier, monospace;
+          color: #d6336c;
+        }
+        
+        .language-html {
+          color: #22863a; /* Green for HTML */
+        }
+        
+        .language-javascript {
+          color: #005cc5; /* Blue for JavaScript */
+        }
+    </style>
+</head>
+<body>
+    <h1>Different ways of using vue</h1>
+    <ol>
+        <li>Widget - approach on a MPA (Multi page application) to control certain parts of the pages which are rendered on and served by a backend server.</li>
+        <li>SPA (Single Page Application) - Server only sends one HTML page, thereafter, Vue takes over and controls the UI.</li>
+    </ol>
+
+    <p>{{ variable }} - is only available between the tags (not as an attribute)</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+    
+    <br>
+    <h1>v-bind</h1>
+
+    <p>v-bind:attributeName="variableName" - for attributes</p>
+    <p>instead of v-bind we can use : as a shortcut</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+
+    <p>we can also use just :href="link" as a shortcut<p>
+
+    <p>inside {{ }} we can execute simple js code such as {{ 1 + 1 }}, {{ functionName() }} etc (not really used though)</p>
+    <br>
+    <h1>v-html</h1>
+    <p>v-html="variableName" can be used if the variable stores an html structure</p>
+    
+    <h2>examples:</h2>
+    <code class="code"></code>
+    
+    <p>however, this is not the best thing to do as it may create security issues</p>
+
+    <h1>Events: (v-on)</h1>
+    <p>v-on:eventName="action"</p>
+    <p>instead of v-on we can use @ as a shortcut</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>these functions can also take a parameter</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>we can also do some logic inside html but it's not the best practice</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+
+    <p>change a variable on an event</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p class="note">Note: "event" is sent by default by the browser</p>
+
+    <p>If we need to send another variable to the function, we need to include $event in the parameters list</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h1>Event modifiers</h1>
+    <p>Instead of using the traditional event.preventDefault(), Vue offers some modifiers of its own (.prevent)</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <ol>
+        <li>
+          <strong>.stop</strong>
+          <ul>
+            <li><strong>Description:</strong> Prevents further propagation of the current event.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.prevent</strong>
+          <ul>
+            <li><strong>Description:</strong> Prevents the default action of the event.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.capture</strong>
+          <ul>
+            <li><strong>Description:</strong> Makes the event listener run in the capture phase.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.self</strong>
+          <ul>
+            <li><strong>Description:</strong> Ensures the event is triggered only if the event target is the element itself.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.once</strong>
+          <ul>
+            <li><strong>Description:</strong> Ensures the event listener is invoked at most once.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.passive</strong>
+          <ul>
+            <li><strong>Description:</strong> Indicates that the event listener will never call <code>preventDefault()</code>. Useful for performance optimization in scroll events.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.native</strong> (Vue 2 only)
+          <ul>
+            <li><strong>Description:</strong> Allows listening to native DOM events on child components.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>.exact</strong>
+          <ul>
+            <li><strong>Description:</strong> Ensures the event is triggered only if the exact modifier keys are pressed.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Modifier Key Combinations</strong>
+          <ul>
+            <li><strong>Description:</strong> Requires specific keys to be pressed (e.g., <code>.ctrl</code>, <code>.alt</code>, <code>.shift</code>, <code>.meta</code>).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Key Event Modifiers</strong>
+          <ul>
+            <li><strong>Description:</strong> Used to listen for specific key presses (e.g., <code>.enter</code>, <code>.tab</code>, <code>.delete</code>, <code>.esc</code>, etc.).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Chaining Modifiers</strong>
+          <ul>
+            <li><strong>Description:</strong> Modifiers can be chained for more precise control.</li>
+          </ul>
+        </li>
+    </ol>
+
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h2>v-model or the two-way binding</h2>
+    <p>instead of using the v-bind:value in pair with the v-on:click</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+    <p>we can just use v-model which does the same as the code above</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+    
+    
+
+    <h1>Computed properties</h1>
+    <p>If we call a method to display a variable like this &lt;p&gt;{{ updatedName() }}&lt;/p&gt;, vue will call this method everytime there are any changes on the page because it doesn't know the dependencies of this method.
+    This is why we use computed methods for displaying some changed variables since these will be executed only when their dependencies(variables) are changed.
+    </p>
+
+    <h2>example: (@keyup is just to make sure we display the updated name only when confirmed. Not really part of the example here)</h2>
+
+    <code class="code"></code>
+
+    <h1>Watchers</h1>
+    <p>watch methods are used to change something or perform an action when a variable's value has changed. This is useful for http requests, alerts etc. A watch method is named as the variable it's supposed to watch after</p>
+
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h1>Methods vs Computed vs Watch</h1>
+    <img src="./images/image1.png" alt="">
+
+    <h1>Conditionally adding classes to elements</h1>
+    <p>To add a class to an element we will use :class binding</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>we can also use computed methods to change the classes if the logic is a bit more complicated or if we have more classes to add/have</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>there is also the possibility to add classes using the array syntax. We can combine conditional and static classes in such arrays</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+
+    <h1>Conditional rendering/displaying</h1>
+    <h2>v-if, v-else-if, v-else</h2>
+    <p>to render content conditionally, we use v-if, v-else-if, v-else. This RENDERS the content which means if the condition is not true for any of these operators, the DOM will not populate with the respective content</p>
+
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h2>v-show</h2>
+    <p>to render a piece of content in the DOM but just to hide it if needed, we can use v-show. Generally it's better to use conditional rendering instead of conditional hiding due to security reasons. However, if an element's visibility is being switched a lot and it's not impacting the security of the page, we will use v-show because of performance (rendering the same element multiple time is not the most optimal way to do thintgs)</p>
+
+
+    <h1>Rendering lists of data</h1>
+    <p>to render lists/arrays, we use v-for</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+    <p class="note">Note: if we have an unique ID available, it's always a good idea to also include :key="id"</p>
+
+    <p>we can also use indexes for the loop</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>we can also loop through objects and display the key and the index</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <p>to remove an item from a list we can use .splice()</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h1>Vue: Behind the Scenes</h1>
+    <h2>ref</h2>
+    <p>instead of saving the input value on every keystroke, we can use a ref</p>
+    <h2>example - without ref:</h2>
+    <code class="code"></code>
+
+    <h2>example - with ref</h2>
+    <code class="code"></code>
+
+
+    <h2>Vue Instance Lifecycle</h2>
+    <img src="./images/image2.png" alt="">
+
+    <h1>Components</h1>
+    <p>essentially components are small vue apps which are used inside the main apps. We use components for reusability and because of performance.</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h1>Vue Cli</h1>
+    <code class="code"></code>
+
+    <h2>components</h2>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <h2>props - passing data from parent to child element</h2>
+    <h2>example: </h2>
+    <code class="code"></code>
+
+    <h2>unidirectional data flow</h2>
+    <p>props should't be mutated inside the child element. If we need to change a prop inside a child element, we just have to assign this prop to a temp variable</p>
+
+    <h2>prop validation</h2>
+    <h2>example:</h2>
+
+    <code class="code"></code>
+    
+    <h2>supported prop values:</h2>
+    <ul>
+      <li>String</li>
+      <li>Number</li>
+      <li>Boolean</li>
+      <li>Array</li>
+      <li>Object</li>
+      <li>Date</li>
+      <li>Function</li>
+      <li>Symbol</li>
+    </ul>
+
+    <p>for loop with components</p>
+    <h2>example:</h2>
+    <code class="code"></code>
+
+    <!-- Add syntax highlighting for HTML and JavaScript -->
+    <pre>
+      <code>
+        &lt;friend-contact
+          v-for="friend in friends"  
+          :key="friend.id"
+          :name="friend.name"
+          :phone-number="friend.phone"
+          :email-address="friend.email"
+          :is-favourite="friend.isFavourite"
+        /&gt;
+      </code>
+    </pre>
+    
+    
+  
+  <pre><code class="language-javascript">
+  // JavaScript section
+  data() {
+    return {
+      friends: [
+        {
+          id: 0,
+          name: 'Laur Racovet',
+          phone: '123 456 789',
+          email: 'laur@example.com',
+          isFavourite: true
+        },
+        {
+          id: 1,
+          name: 'Ryan Gosling',
+          phone: '123 456 788',
+          email: 'ryan@example.com',
+          isFavourite: false
+        }
+      ]
+    }
+  }
+  </code></pre>
+  
+  <pre><code class="language-javascript">
+  // Child component props
+  props: {
+    id: Number,
+    name: {
+      type: String,
+      required: true,
+      default: 'Friend'
+    },
+    phoneNumber: String,
+    emailAddress: String,
+    isFavourite: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  }
+  </code></pre>
+  
+    
+</body>
+</html>
+
+
+
+<script>
+    const codes = [
+`
+`,
+`
+
+`,
+`
+`,
+`
+
+`,
+`
+`,
+`
+`,
+`
+`,
+`
+`,
+`
+`,
+`
+`,
+`
+`,
+`
+`,
+`
+
+`,
+`
+
+`,
+`
+
+`,
+`
+`,
+`
+
+`,
+`
+props: {
+  name: {
+    type: String,
+    required: true,
+    default: 'Friend'
+  },
+  phoneNumber: String,
+  emailAddress: String,
+  isFavourite: {
+    type: String,
+    required: false,
+    default: '0',
+    validator: function(value) {
+      return value === '1' || value === '0';
+    }
+  }
+},
+`
+]
+    const codeElements = document.querySelectorAll(".code");
+
+    codeElements.forEach((element, index) => {
+        element.innerText = codes[index];
+    });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightElement(block);
+  });
+});
+
+</script>
+  
