@@ -2,12 +2,10 @@
   <li>
     <h2>{{ name }}</h2>
     <button @click="toggleDetails">{{detailsAreVisible ? 'Hide' : 'Show'}} Details</button>
-    <div v-if="isFavourite"><strong>Favourite friend!</strong></div>
+    <div class="favouriteWrapper" v-if="isFavourite"><strong>Favourite friend!</strong></div>
     <ul v-if="detailsAreVisible">
       <li><strong>Phone:</strong> {{ phoneNumber }}</li>
       <li><strong>Email:</strong> {{ emailAddress }}</li>
-      <a v-bind:href="link">about Vue</a>
-      <p v-html="outputGoal()"></p>
     </ul>
   </li>
 </template>
@@ -41,3 +39,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  .favouriteWrapper {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+</style>
