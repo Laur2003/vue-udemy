@@ -791,8 +791,47 @@
     }
   }</code>
 </pre>
-  
-    
+
+
+<p>sending events/info from the child element to the parent element</p>
+<h2>example:</h2>
+
+<p>parent component</p>
+<pre><code class="language-html">
+  &lt;friend-contact
+    v-for="friend in friends"  
+    :key="friend.id"
+    :id="friend.id"
+    :name="friend.name"
+    :phone-number="friend.phone"
+    :email-address="friend.email"
+    :is-favourite="friend.isFavourite"
+    @toggle-favourite="toggleFavourite" // this line
+  &gt;&lt;/friend-contact&gt;
+</code>
+</pre>
+
+<pre><code class="language-javascript">
+  methods: {
+    toggleFavourite(id) {
+      this.friends[id].isFavourite = !this.friends[id].isFavourite;
+    }
+  }
+</code>
+</pre>
+
+<p>child component</p>
+<pre><code class="language-html">
+  &lt;button @click="toggleFavourite"&gt;{{ isFavouriteText }}&lt;/button&gt;
+</code>
+</pre>
+
+<pre><code class="language-javascript">
+  toggleFavourite() {
+    this.$emit('toggle-favourite', this.id);
+  }
+</code>
+</pre>
 </body>
 </html>
   

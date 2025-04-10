@@ -6,10 +6,12 @@
       <friend-contact
         v-for="friend in friends"  
         :key="friend.id"
+        :id="friend.id"
         :name="friend.name"
         :phone-number="friend.phone"
         :email-address="friend.email"
         :is-favourite="friend.isFavourite"
+        @toggle-favourite="toggleFavourite"
       ></friend-contact>
     </ul>
   </section>
@@ -33,8 +35,20 @@ export default {
           phone: '123 456 788',
           email: 'ryan@example.com',
           isFavourite: false
+        },
+        {
+          id: 2,
+          name: 'Iarik Giorgiovich',
+          phone: '123 456 788',
+          email: 'iarik@example.com',
+          isFavourite: false
         }
       ]
+    }
+  },
+  methods: {
+    toggleFavourite(id) {
+      this.friends[id].isFavourite = !this.friends[id].isFavourite;
     }
   }
 }
