@@ -832,6 +832,31 @@
   }
 </code>
 </pre>
+<p>it's also recommended to define the events the child component will send</p>
+<h2>example:</h2>
+
+<pre><code class="language-javascript">
+  export default {
+    ...
+    emits: ['toggle-favourite'],
+  
+    // When we want to make some validation
+    emits: {
+      'toggle-favourite': function(id) {
+        if (id) {
+          return true;
+        } else {
+          console.warn("Id is missing");
+          return false;
+        }
+      }
+    },
+    ...
+  }
+</code>
+</pre>
+
+
 </body>
 </html>
   

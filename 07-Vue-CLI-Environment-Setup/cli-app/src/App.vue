@@ -2,6 +2,7 @@
   <section>
     <header><h1>My Friends</h1></header>
 
+    <new-friend @create-friend="addFriendToList"></new-friend>
     <ul>
       <friend-contact
         v-for="friend in friends"  
@@ -12,6 +13,7 @@
         :email-address="friend.email"
         :is-favourite="friend.isFavourite"
         @toggle-favourite="toggleFavourite"
+        @delete-friend="deleteFriend"
       ></friend-contact>
     </ul>
   </section>
@@ -47,8 +49,31 @@ export default {
     }
   },
   methods: {
+    getFriendById(id) {
+      return this.friends.find(
+        (friend) => friend.id === id
+      );
+    },
     toggleFavourite(id) {
-      this.friends[id].isFavourite = !this.friends[id].isFavourite;
+      const identifiedFriend = this.getFriendById(id);
+      identifiedFriend.isFavourite = !identifiedFriend.isFavourite;
+    },
+    addFriendToList(name, phone, email) {
+      let newFriend = {
+        id: new Date().toISOString(),
+        name: name,
+        phone: phone,
+        email: email,
+        isFavourite: false
+      };
+
+      this.friends.push(newFriend);
+      console.table(this.friends);
+    },
+    deleteFriend(id) {
+      this.friends = this.friends.filter(
+        (friend) => friend.id !== id
+      );
     }
   }
 }
