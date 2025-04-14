@@ -856,6 +856,30 @@
 </code>
 </pre>
 
+<h2>provide and inject - a way of avoiding pass-through components</h2>
+<p>there will be use cases when we will need to pass data from an ancestor component to a child component and to avoid using props on every parent-child relationship,
+  we can set a provide method which will be on the ancestor element and an inject method on the child component
+</p>
+
+<h2>example:</h2>
+<pre><code class="language-javascript">
+  // ancestor component
+  export default {
+    provide() {
+      return {
+        username: 'Jane',
+        age: 28
+      }
+    }
+  }
+
+
+  // child component
+  export default {
+    inject: ['username', 'age']
+  }
+</code>
+</pre>
 
 </body>
 </html>
