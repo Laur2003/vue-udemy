@@ -1053,6 +1053,92 @@
 </pre>
 
 <h2>components summary</h2>
-  <img src="images/image3.png" alt="">
+<img src="images/image3.png" alt="">
+
+
+<h2>Forms</h2>
+<p>
+  It's a good idea to work with v-model when handling forms. This is because for example, if there is a number element, it won't be returned as a String.
+</p>
+
+
+
+<h2>Http Requests</h2>
+<p>for http requests we can use fetch() or axios</p>
+<h2>example of a POST request with fetch</h2>
+
+<pre><code class="language-javascript">
+  fetch('https://vue-http-demo-a781f-default-rtdb.europe-west1.firebasedatabase.app/surveys.json', {
+    method: 'POST',
+    heders: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: this.enteredName,
+      rating: this.chosenRating
+    })
+  });
+</code>
+</pre>
+
+<h2>example of a GET request with fetch</h2>
+
+<pre><code class="language-javascript">
+  fetch(
+    'https://vue-http-demo-a781f-default-rtdb.europe-west1.firebasedatabase.app/surveys.json',
+    {
+      method: 'GET',
+    }
+  )
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+  .then((data) => {
+    const results = [];
+
+    for (const id in data) {
+      results.push({
+        id: id,
+        name: data[id].name,
+        rating: data[id].rating,
+      });
+    }
+
+    this.results = results;
+  });
+</code>
+</pre>
+
+<h2>when we wan</h2>
+
+<pre><code class="language-javascript">
+  fetch(
+    'https://vue-http-demo-a781f-default-rtdb.europe-west1.firebasedatabase.app/surveys.json',
+    {
+      method: 'GET',
+    }
+  )
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+  .then((data) => {
+    const results = [];
+
+    for (const id in data) {
+      results.push({
+        id: id,
+        name: data[id].name,
+        rating: data[id].rating,
+      });
+    }
+
+    this.results = results;
+  });
+</code>
+</pre>
 </body>
 </html>
