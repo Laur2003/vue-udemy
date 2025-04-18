@@ -1003,6 +1003,36 @@
 </code>
 </pre>
 
+<p>We can have some default content inside of a slot if we just enter it where the slot will be called.
+  Then, if we call the slot and give no additional content, it will render the default.
+</p>
+
+<p>We can also conditionally render content depending on what info we have for a slot</p>
+<pre><code class="language-javascript">
+  v-if="$slots.slot_name"
+</code>
+</pre>
+
+<h2>dynamic components</h2>
+<p>instead of using v-if if we want to render different components based on a variable/scenario, we can use it like this</p>
+<pre><code class="language-html">
+  &lt;button @click="setSelectedComponents('active-goals')"&gt;Active Goals&lt;/button&gt;
+  &lt;button @click="setSelectedComponents('manage-goals')"&gt;Manage Goals&lt;/button&gt;
+  &lt;!-- &lt;active-goals v-if="selectedComponent === 'active-goals'"&gt;&lt;/active-goals&gt;
+  &lt;manage-goals v-if="selectedComponent === 'manage-goals'"&gt;&lt;/manage-goals&gt; --&gt;
+  &lt;component :is="selectedComponent"&gt;&lt;/component&gt;
+</code>
+</pre>
+
+<p>this approach is good but it removes the component from the DOM which means that if the user entered some data and then switched to another component,
+  the progress will be lost. For this we have a solution.
+</p>
+<pre><code class="language-html">
+  &lt;keep-alive&gt;
+    &lt;component :is="selectedComponent"&gt;&lt;/component&gt;
+  &lt;/keep-alive&gt;
+</code>
+</pre>
 
 </body>
 </html>
