@@ -4,9 +4,12 @@
     <input type="text" ref="goal" />
     <button @click="setGoal">Set Goal</button>
 
-    <error-alert v-if="inputIsInvalid">
-        <h1>input is invalid</h1>
-    </error-alert>
+    <teleport to="body">
+        <error-alert v-if="inputIsInvalid">
+            <h1>Input is invalid</h1>
+            <button @click="hideError">Okay</button>
+        </error-alert>
+    </teleport>
 </template>
 
 <script>
@@ -27,6 +30,9 @@ export default {
             if (enteredValue === ''){
                 this.inputIsInvalid = true;
             }
+        },
+        hideError() {
+            this.inputIsInvalid = false;
         }
     }
 }

@@ -1034,5 +1034,25 @@
 </code>
 </pre>
 
+<h2>
+  teleport
+</h2>
+<p>sometimes we will need to call components from one place but have them rendered in the DOM in another place. This might be useful
+  when we need to display a dialog
+</p>
+
+<h2>example:</h2>
+<pre><code class="language-html">
+  &lt;teleport to="body"&gt;
+    &lt;error-alert v-if="inputIsInvalid"&gt;
+        &lt;h1&gt;Input is invalid&lt;/h1&gt;
+        &lt;button @click="hideError"&gt;Okay&lt;/button&gt;
+    &lt;/error-alert&gt;
+  &lt;/teleport&gt;
+</code>
+</pre>
+
+<h2>components summary</h2>
+  <img src="images/image3.png" alt="">
 </body>
 </html>
