@@ -134,13 +134,12 @@
       <li>Widget - approach on a MPA (Multi page application) to control certain parts of the pages which are rendered on and served by a backend server.</li>
       <li>SPA (Single Page Application) - Server only sends one HTML page, thereafter, Vue takes over and controls the UI.</li>
     </ol>
-
     <p>{{ variable }} - is only available between the tags (not as an attribute)</p>
     <h2>example:</h2>
     <pre>
     <code class="language-html">  &lt;p&gt;{{ message }}&lt;/p&gt;</code>
     </pre>
-    
+
     <br>
     <h1>v-bind</h1>
 
@@ -1140,5 +1139,358 @@
   });
 </code>
 </pre>
+
+<h1>Routing</h1>
+<h2>setup</h2>
+<pre><code class="language-javascript">
+  npm install --save vue-router
+
+  // main.js
+  import { createApp } from 'vue';
+  import { createRouter, createWebHistory } from 'vue-router';
+
+  import App from './App.vue';
+  import TeamsList from './components/teams/TeamsList.vue';
+  import UsersList from './components/users/UsersList.vue';
+
+  const app = createApp(App);
+
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+      {
+        path: '/teams',
+        component: TeamsList
+      },
+      {
+        path: '/users',
+        component: UsersList
+      }
+    ]
+  });
+
+  app.use(router);
+
+  app.mount('#app');
+
+  // we also need to specify where the component should load when routing using a built in (after we imported it)
+  &lt;router-view&gt;&lt;router-view&gt;
+</code>
+</pre>
+
+<h2>navigation<h2>
+<pre><code class="language-html">
+  &lt;li&gt;
+    &lt;router-link to="/teams"&gt;Teams&lt;/router-link&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;router-link to="/users"&gt;Users&lt;/router-link&gt;
+  &lt;/li&gt;
+</code>
+</pre>
+
+<p>When we use router-link, it essentially loads as an "a" tag so the styling is done from the "a" tag.</p>
+<p>By default, there are 2 classes added to the router links. router-link-active and router-link-exact-active so we can use these for styling</p>
+
+<p>change the route programatically</p>
+
+<pre><code class="language-javascript">
+  confirmInput() {
+    // do something
+    this.$router.push('/teams');
+  }
+</code>
+</pre>
+
+<p>we can also send custom parameters in the url/route and load content based on that</p>
+<h2>example: </h2>
+<pre><code class="language-javascript">
+  // main.js
+  {
+    path: '/teams/:teamId',
+    component: TeamMembers
+  }
+  //
+  created() {
+    const teamId = this.$route.params.teamId;
+    const selectedTeam = this.teams.find(team => team.id === teamId);
+    const members = selectedTeam.members;
+    const selectedMembers = [];
+    for (const member of members) {
+      const selectedUser = this.users.find(user => user.id === member);
+      selectedMembers.push(selectedUser); 
+    }
+
+    this.members = selectedMembers;
+    this.teamName = selectedTeam.name;
+  }
+  //
+  &lt;router-link :to="teamMembersLink"&gt;View Members&lt;/router-link&gt;
+
+  computed: {
+    teamMembersLink() {
+      return '/teams/' + this.id;
+    }
+  }
+</code>
+</pre>
+
+<p>a better way to do that is by sending the parameters as props rather than just as part of the url</p>
+<h2>example: </h2>
+
+<pre><code class="language-javascript">
+  // main.js
+  {
+    path: '/teams/:teamId',
+    component: TeamMembers,
+    props: true
+  }
+  //
+  inject: ['users', 'teams'],
+  props: ['teamId'],
+  components: {
+    UserItem
+  },
+  data() {
+    return {
+      teamName: '',
+      members: []
+    };
+  },
+  methods: {
+    loadTeamMembers(teamId) {
+      const selectedTeam = this.teams.find(team => team.id === teamId);
+      const members = selectedTeam.members;
+      const selectedMembers = [];
+      for (const member of members) {
+        const selectedUser = this.users.find(user => user.id === member);
+        selectedMembers.push(selectedUser); 
+      }
+
+      this.members = selectedMembers;
+      this.teamName = selectedTeam.name;
+    }
+  },
+  created() {
+    this.loadTeamMembers(this.teamId);
+  },
+  watch: {
+    teamId(newId) {
+      this.loadTeamMembers(newId);
+    }
+  }
+
+  // the watch was added because there was a link on the component to load the same component with different id. 
+  // for this to work, we need the prop and to watch it and reload the contend based on the porp (teamId in this case)
+</code>
+</pre>
+
+<p>we can set a default component for the starting page if needed.</p>
+<h2>example: </h2>
+
+<pre><code class="language-javascript">
+  // main.js
+  {
+    path: '/',
+    redirect: '/teams'
+  }
+  // or - it doesn't change the url
+  {
+    path: '/teams',
+    component: TeamsList,
+    alias: '/'
+  },
+</code>
+</pre>
+
+<p>we can also handle not found pages by redirecting or by loading a not found template</p>
+
+<pre><code class="language-javascript">
+  // main.js
+  // redirect
+  {
+    path: '/:notFound(.*)',
+    component: TeamMembers,
+    redirect: '/teams'
+  }
+  // load a not found component
+  {
+    path: '/:notFound(.*)',
+    component: NotFound
+  }
+</code>
+</pre>
+
+
+<h2>nested routers</h2>
+<p>we can set a route which will be a child of a different route. This is for handling the scenario when we want to load the child component/route inside
+  the parent component/route
+</p>
+
+<pre><code class="language-javascript">
+  // main.js
+  {
+    path: '/teams',
+    component: TeamsList,
+    children: [
+      {
+        path: ':teamId',
+        component: TeamMembers,
+        props: true
+      }
+    ]
+  },
+
+  // since we will now display the child component inside the parent component, we have to make sure to include a
+  // router-view inside the parent component
+</code>
+</pre>
+
+<p>instead of returning a route as a string, we can build it as an object and make it reusable in the future
+</p>
+<h2>example: </h2>
+
+<pre><code class="language-javascript">
+  // TeamsItem.vue
+  // old
+  teamMembersLink() {
+    return '/teams/' + this.id;
+  }
+
+  // new
+  // main.js
+  // assigning a name for the nested route
+  {
+    name: 'teams',
+    path: '/teams',
+    component: TeamsList,
+    children: [
+      {
+        name: 'team-members',
+        path: ':teamId',
+        component: TeamMembers,
+        props: true
+      }
+    ]
+  },
+
+  // TeamsItem.vue
+  // returning an object with this name which means we don't have to include the path anymore. This means we can just rename it in main.js if needed and not in 
+  // all the places it was used
+  teamMembersLink() {
+    return {
+      name: 'team-members',
+      params: {
+        teamId: this.id
+      }
+    }
+  }
+</code>
+</pre>
+
+<h2>query parameters </h2>
+<pre><code class="language-javascript">
+  // TeamsItem.vue
+  teamMembersLink() {
+    return {
+      name: 'team-members',
+      params: {
+        teamId: this.id
+      },
+      query: {
+        sort: 'test'
+      }
+    };
+  }
+</code>
+</pre>
+
+<p>we can load multiple components via router-view inside another component
+</p>
+<h2>example: </h2>
+<pre><code class="language-javascript">
+  // main.js
+  {
+    path: '/users',
+    components: {
+      default: UsersList,
+      footer: UsersFooter
+    }
+  },
+
+  // App.vue
+  &lt;main&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;router-view name="footer"&gt;&lt;/router-view&gt;
+  &lt;/footer&gt;
+</code>
+</pre>
+
+
+
+<h2>controlling scroll behavior </h2>
+<p>we can load multiple components via router-view inside another component
+</p>
+
+<pre><code class="language-javascript">
+  // main.js
+
+  // if the user is redirected to a page they didn't visit - it will scroll to top
+  // if they did visit the page, it scrolls to the savedPosition
+  scrollBehavior(to, from, savedPosition) {
+    console.log(to, from, savedPosition)
+    
+    if (savedPosition) {
+      return savedPosition;
+    }
+    
+    return {
+      left: 0,
+      top: 0
+    }
+  }
+</code>
+</pre>
+
+<h2>navigation guards</h2>
+<p>we can set a logic (function) before every routing to handle edge cases/form inputs etc
+</p>
+
+<pre><code class="language-javascript">
+  // main.js
+  router.beforeEach(function (to, from, next) {
+    console.warn('Global beforeEach');
+  
+    if (to.name === 'team-members') {
+      next();
+      // next essentially allows the redirect
+    } else {
+      window.alert('You can only go to team-members page!');
+      // we can also redirect to a specific route if we want so
+      next({ name: 'team-members', params: { teamId: 't2' }});
+    }
+  
+  });
+</code>
+</pre>
+
+
+<pre><code class="language-javascript">
+  // UsersList.vue
+  // this function checks our conditions before re-routing
+  beforeRouteLeave(to, from, next) {
+    if (this.changesSaved) next();
+    else {
+      const userWantsToLeave = confirm('You have unsaved data!');
+      next(userWantsToLeave);
+    }
+  }
+</code>
+</pre>
+
+
 </body>
 </html>
