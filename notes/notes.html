@@ -1491,6 +1491,169 @@
 </code>
 </pre>
 
+<h1>The Composition Api</h1>
+<h2>ref()</h2>
+<p>ref is created to use reactive variables</p>
+
+<h2>example:</h2>
+<pre><code class="language-javascript">
+  setup() {
+  const userName = ref('Laur');
+
+  return {
+    userName: userName
+  }
+}
+</code>
+</pre>
+<p>we can also used a setup in the script tag as we do with scoped for the styles</p>
+
+
+
+<p>if we want to make an object reactive, we have to import and use the reactive function</p>
+<h2>example:</h2>
+
+<pre><code class="language-javascript">
+  import { reactive } from 'vue';
+
+  const user = reactive({
+    name: 'Laur',
+    age: 22
+  });
+
+  setTimeout(function() {
+    user.name = 'Laurentiu';
+    console.warn('worked');
+  }, 2000);
+
+  return {
+    user: user
+  }
+
+  // in html, it will be accessed as user.name and user.age
+</code>
+</pre>
+
+<p>instead of methods, we will use regular function and just return those just as we return the data</p>
+<h2>example:</h2>
+<pre><code class="language-javascript">
+  setup() {
+  const user = reactive({
+    name: 'Laur',
+    age: 22
+  });
+
+  function setNewData() {
+    user.name = 'laurentiu';
+  }
+
+  return {
+    user: user,
+    setNewData: setNewData
+  }
+}
+</code>
+</pre>
+
+<h2>computed</h2>
+<p>when working with computed, we can't edit refs even though we can do that for any other method refs</p>
+
+<pre><code class="language-javascript">
+  const firstName = ref('');
+  const lastName = ref('');
+
+  const fullName = computed(function() {
+    return firstName.value + ' ' + lastName.value;
+  });
+</code>
+</pre>
+
+<h2>two way binding</h2>
+<p>for us to be able to use v-model, we need to return the variable</p>
+<h2>example:</h2>
+<pre><code class="language-javascript">
+  &lt;input type="text" placeholder="First Name" v-model="firstName" /&gt;
+  &lt;input type="text" placeholder="Last Name" v-model="lastName" /&gt;
+
+  const firstName = ref('');
+  const lastName = ref('');
+
+  const fullName = computed(function() {
+    return firstName.value + ' ' + lastName.value;
+  });
+
+  return {
+    firstName,
+    lastName,
+    fullName
+  }
+</code>
+</pre>
+
+<h2>watchers</h2>
+<pre><code class="language-javascript">
+  import { watch } from 'vue';
+
+  watch(fullName, function() {
+    if (fullName.value.length >= 10) {
+      window.alert('The name is too big!');
+    }
+  });
+</code>
+</pre>
+
+<p>we can also watch for an array of properties</p>
+
+<pre><code class="language-javascript">
+  watch([firstName, lastName], function() {
+    if (firstName.value.length >= 7) {
+      window.alert('The first name is too big!');
+    } else if (lastName.value.length >= 7) {
+      window.alert('The last name is too big!');
+    }
+  });
+</code>
+</pre>
+
+<h2>props</h2>
+<p>props are pretty similar to what options api has. We just need to send the props parameter in the setup function and it will work</p>
+
+<pre><code class="language-javascript">
+  //component
+  export default {
+    props: ['userName', 'age'],
+    setup(props) {
+      window.alert("props here" + props['userName']);
+    }
+  }
+</code>
+</pre>
+
+<h2>emit</h2>
+  
+<pre><code class="language-javascript">
+// child component
+setup(props, context) {
+  context.emit('test-emit');
+}
+
+// parent component
+&lt;user-data @test-emit="testEmit"&gt;&lt;/user-data&gt;
+
+function testEmit() {
+  window.alert('test emit here');
+}
+
+return {
+  testEmit
+}
+</code>
+</pre>
+
+<img src="images/image4.png" alt="">
+
+<h2>Lifecycle hooks</h2>
+<img src="images/image5.png" alt="">
 
 </body>
 </html>
